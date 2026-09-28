@@ -57,7 +57,7 @@ const predictResponseSchema = z
     pipeline: z
       .array(z.object({ step: z.string(), detail: z.string().default(""), ms: milliseconds }))
       .min(1, "pipeline kosong"),
-    // API teman mengirim null jika tidak ada peringatan; mock mengirim [].
+    // API lestari-usg mengirim null jika tidak ada peringatan; mock mengirim [].
     warnings: z
       .array(z.string())
       .nullish()
