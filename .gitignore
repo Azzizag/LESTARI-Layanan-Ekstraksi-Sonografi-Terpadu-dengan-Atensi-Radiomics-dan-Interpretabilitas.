@@ -1,0 +1,43 @@
+# env
+.env
+.env.*
+!.env.example
+
+# node / next
+node_modules/
+.next/
+out/
+web/test-results/
+web/playwright-report/
+
+# python
+__pycache__/
+.venv/
+.pytest_cache/
+
+# model besar (pakai Git LFS atau Hugging Face Hub)
+ai-service/models/*
+!ai-service/models/.gitkeep
+
+# os
+.DS_Store
+Thumbs.db
+
+# claude code lokal
+.claude/settings.local.json
+
+# screenshot Playwright MCP
+.playwright-mcp/
+
+# dokumen internal tim, tidak di-push ke GitHub
+docs/
+
+# API model asli teman (kode + bobot model): sistem inti, tidak di-push
+lestari-usg/
+
+# sistem inti: hanya di laptop tim, tidak di-push ke GitHub publik
+/CLAUDE.md
+.claude/
+ai-service/
+supabase/migrations/
+supabase/seed/images/

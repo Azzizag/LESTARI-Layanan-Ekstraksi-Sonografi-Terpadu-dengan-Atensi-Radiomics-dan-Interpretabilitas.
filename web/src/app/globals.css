@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Token dari docs/DESIGN.md bagian 2. Ubah nilai di :root dan .dark, bukan di komponen. */
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-jetbrains);
+  --font-heading: var(--font-jakarta);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand-rose: var(--brand-rose);
+  --color-viewer: var(--viewer);
+  --color-normal: var(--normal);
+  --color-normal-bg: var(--normal-bg);
+  --color-benign: var(--benign);
+  --color-benign-bg: var(--benign-bg);
+  --color-malignant: var(--malignant);
+  --color-malignant-bg: var(--malignant-bg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Kartu 10px (rounded-xl), tombol dan input 8px (rounded-lg). */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: calc(var(--radius) - 2px);
+  --radius-xl: var(--radius);
+  --radius-2xl: calc(var(--radius) + 4px);
+  --radius-3xl: calc(var(--radius) + 8px);
+  --radius-4xl: calc(var(--radius) + 12px);
+}
+
+:root {
+  --radius: 10px;
+
+  --background: #f5f7fa;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #0f5e6b;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e4f2f3;
+  --secondary: #eef1f5;
+  --secondary-foreground: #0f172a;
+  --muted: #eef1f5;
+  --muted-foreground: #5b6475;
+  --accent: #eef1f5;
+  --accent-foreground: #0f172a;
+  --destructive: #b91c1c;
+  --border: #e3e7ee;
+  --input: #e3e7ee;
+  --ring: #0f5e6b;
+
+  --brand-rose: #d6336c;
+  --viewer: #0a0d12;
+  --normal: #137333;
+  --normal-bg: #e8f5ec;
+  --benign: #b45309;
+  --benign-bg: #fdf3e4;
+  --malignant: #b91c1c;
+  --malignant-bg: #fce9e9;
+
+  --chart-1: #0f5e6b;
+  --chart-2: #137333;
+  --chart-3: #b45309;
+  --chart-4: #b91c1c;
+  --chart-5: #5b6475;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #0f5e6b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e4f2f3;
+  --sidebar-accent-foreground: #0f5e6b;
+  --sidebar-border: #e3e7ee;
+  --sidebar-ring: #0f5e6b;
+}
+
+.dark {
+  --background: #0b1015;
+  --foreground: #e6eaf0;
+  --card: #121922;
+  --card-foreground: #e6eaf0;
+  --popover: #121922;
+  --popover-foreground: #e6eaf0;
+  --primary: #3fb3c2;
+  --primary-foreground: #06252a;
+  --primary-soft: #12313a;
+  --secondary: #1a2330;
+  --secondary-foreground: #e6eaf0;
+  --muted: #1a2330;
+  --muted-foreground: #94a0b2;
+  --accent: #1a2330;
+  --accent-foreground: #e6eaf0;
+  --destructive: #f87171;
+  --border: #223040;
+  --input: #223040;
+  --ring: #3fb3c2;
+
+  --brand-rose: #f06595;
+  --viewer: #0a0d12;
+  --normal: #4ade80;
+  --normal-bg: #11281a;
+  --benign: #fbbf24;
+  --benign-bg: #2e2410;
+  --malignant: #f87171;
+  --malignant-bg: #331515;
+
+  --chart-1: #3fb3c2;
+  --chart-2: #4ade80;
+  --chart-3: #fbbf24;
+  --chart-4: #f87171;
+  --chart-5: #94a0b2;
+
+  --sidebar: #121922;
+  --sidebar-foreground: #e6eaf0;
+  --sidebar-primary: #3fb3c2;
+  --sidebar-primary-foreground: #06252a;
+  --sidebar-accent: #12313a;
+  --sidebar-accent-foreground: #3fb3c2;
+  --sidebar-border: #223040;
+  --sidebar-ring: #3fb3c2;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Angka, kode pasien, probabilitas, latensi. */
+@utility tabular {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
