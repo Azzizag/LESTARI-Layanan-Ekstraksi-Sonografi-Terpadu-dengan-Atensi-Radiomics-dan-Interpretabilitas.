@@ -3,8 +3,9 @@ import type { Enums } from "@/lib/database.types"
 export type UserRole = Enums<"user_role">
 
 export const siteConfig = {
-  // Nama kerja. Ganti di sini bila tim memilih nama lain.
-  name: "Sonara",
+  name: "LESTARI",
+  fullName:
+    "Layanan Ekstraksi Sonografi Terpadu dengan Atensi Radiomics dan Interpretabilitas",
   description:
     "Asisten deteksi dini kanker payudara dari citra USG, dijelaskan AI dan divalidasi dokter.",
   disclaimer:

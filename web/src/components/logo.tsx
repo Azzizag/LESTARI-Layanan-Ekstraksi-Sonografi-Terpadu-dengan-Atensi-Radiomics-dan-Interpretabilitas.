@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-// Logo Sonara dari docs/prototype/index.html.
+// Logo LESTARI dari docs/prototype/index.html.
 export function LogoMark({ size = 30, className }: { size?: number; className?: string }) {
   return (
     <svg

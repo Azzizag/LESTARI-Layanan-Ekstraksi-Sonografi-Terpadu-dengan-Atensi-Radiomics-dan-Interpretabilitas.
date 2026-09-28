@@ -1,6 +1,6 @@
-# Sonara
+# LESTARI
 
-Aplikasi web Computer-Aided Diagnosis untuk deteksi dini kanker payudara dari citra USG, dengan tiga kelas: Normal, Benign, Malignant. AI memberi prediksi awal, probabilitas tiap kelas, dan heatmap Grad-CAM; dokter memvalidasi dan menetapkan diagnosis akhir.
+**Layanan Ekstraksi Sonografi Terpadu dengan Atensi Radiomics dan Interpretabilitas.** Aplikasi web Computer-Aided Diagnosis untuk deteksi dini kanker payudara dari citra USG, dengan tiga kelas: Normal, Benign, Malignant. AI memberi prediksi awal, probabilitas tiap kelas, dan heatmap Grad-CAM; dokter memvalidasi dan menetapkan diagnosis akhir.
 
 Dibuat untuk final GEMASTIK KTI.
 
