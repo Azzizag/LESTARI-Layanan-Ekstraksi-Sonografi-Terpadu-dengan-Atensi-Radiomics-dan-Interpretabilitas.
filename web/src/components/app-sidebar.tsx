@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { roleHome, roleLabel, siteConfig, type UserRole } from "@/config/site"
+import { initials } from "@/lib/utils"
 
 type NavItem = { href: string; label: string; icon: LucideIcon }
 type NavGroup = { label: string; items: NavItem[] }
@@ -66,14 +67,6 @@ function isActive(pathname: string, href: string, role: UserRole) {
     return pathname === href || pathname.startsWith(`${href}/review`)
   }
   return pathname === href || pathname.startsWith(`${href}/`)
-}
-
-function initials(name: string) {
-  const words = name
-    .replace(/^(dr|drg|prof)\.?\s+/i, "")
-    .split(/\s+/)
-    .filter(Boolean)
-  return ((words[0]?.[0] ?? "") + (words[1]?.[0] ?? "")).toUpperCase()
 }
 
 export function AppSidebar({

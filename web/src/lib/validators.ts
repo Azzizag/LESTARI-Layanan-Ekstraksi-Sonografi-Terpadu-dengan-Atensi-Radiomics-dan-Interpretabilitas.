@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 import { SCAN_CLASSES } from "@/lib/analysis"
+import { dayKey } from "@/lib/format"
 import { ACCEPTED_SCAN_TYPES, type ScanExtension } from "@/lib/scans"
 
 // ---------------------------------------------------------------------------
@@ -120,3 +121,66 @@ export const analyzeRequestSchema = z.discriminatedUnion("mode", [
 ])
 
 export type AnalyzeRequest = z.infer<typeof analyzeRequestSchema>
+
+// ---------------------------------------------------------------------------
+// Form pasien (dipakai di dialog dan divalidasi ulang di Server Action)
+// ---------------------------------------------------------------------------
+
+const personName = z
+  .string()
+  .trim()
+  .min(2, "Nama minimal 2 karakter.")
+  .max(120, "Nama maksimal 120 karakter.")
+
+// Nomor seluler Indonesia: 08.., 628.., atau +628.., spasi dan tanda hubung diabaikan.
+const indonesianPhone = z
+  .string()
+  .transform((v) => v.replace(/[\s-]/g, ""))
+  .refine((v) => v === "" || /^(\+62|62|0)8[1-9]\d{6,10}$/.test(v), {
+    message: "Nomor telepon tidak valid. Contoh: 0812 3456 7890.",
+  })
+  .transform((v) => v || null)
+
+const optionalBirthDate = z
+  .string()
+  .trim()
+  .refine((v) => v === "" || (/^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v))), {
+    message: "Tanggal lahir tidak valid.",
+  })
+  .refine((v) => v === "" || v <= dayKey(new Date()), {
+    message: "Tanggal lahir tidak boleh di masa depan.",
+  })
+  .refine((v) => v === "" || v >= "1900-01-01", { message: "Tanggal lahir tidak valid." })
+  .transform((v) => v || null)
+
+export const patientFormSchema = z.object({
+  fullName: personName,
+  birthDate: optionalBirthDate,
+  phone: indonesianPhone,
+})
+
+export type PatientFormInput = z.input<typeof patientFormSchema>
+export type PatientFormOutput = z.output<typeof patientFormSchema>
+
+// ---------------------------------------------------------------------------
+// Akun dokter (Server Action admin)
+// ---------------------------------------------------------------------------
+
+export const doctorCreateSchema = z.object({
+  fullName: personName,
+  email: z.string().trim().toLowerCase().pipe(z.email("Format email tidak valid.")),
+  password: z.string().min(8, "Kata sandi minimal 8 karakter.").max(72, "Kata sandi maksimal 72 karakter."),
+})
+
+export const doctorUpdateSchema = z.object({
+  id: z.uuid(),
+  fullName: personName,
+})
+
+export const doctorActiveSchema = z.object({
+  id: z.uuid(),
+  active: z.boolean(),
+})
+
+export type DoctorCreateInput = z.input<typeof doctorCreateSchema>
+export type DoctorUpdateInput = z.input<typeof doctorUpdateSchema>

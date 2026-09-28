@@ -1,4 +1,4 @@
-// Tanpa "use client": hanya diimpor oleh komponen client (analyze-panel), jadi ikut bundel client-nya.
+// Tanpa "use client": hanya diimpor oleh komponen client (dialog pasien), jadi ikut bundel client-nya.
 import { ImageUpIcon, TriangleAlertIcon } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { useDropzone, type FileRejection } from "react-dropzone"

@@ -60,7 +60,9 @@ export async function signIn(_prev: SignInState, formData: FormData): Promise<Si
       error:
         error?.code === "invalid_credentials"
           ? "Email atau kata sandi salah."
-          : "Gagal masuk. Periksa koneksi lalu coba lagi.",
+          : error?.code === "user_banned"
+            ? "Akun Anda nonaktif. Hubungi admin faskes."
+            : "Gagal masuk. Periksa koneksi lalu coba lagi.",
       email: intent.data === "password" ? credentials.email : undefined,
     }
   }
