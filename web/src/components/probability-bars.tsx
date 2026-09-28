@@ -20,7 +20,7 @@ export function ProbabilityBars({
       {SCAN_CLASSES.map((c) => {
         const isPredicted = c === predicted
         return (
-          <div key={c} className="grid grid-cols-[5.5rem_1fr_3.5rem] items-center gap-3">
+          <div key={c} className="grid grid-cols-[5.5rem_1fr_4.25rem] items-center gap-3">
             <dt className={cn("text-sm", isPredicted ? "font-semibold" : "text-muted-foreground")}>
               {classLabel[c]}
             </dt>
@@ -34,7 +34,7 @@ export function ProbabilityBars({
                 style={{ width: `${Math.max(probabilities[c] * 100, 0.5)}%` }}
               />
             </div>
-            <dd className={cn("tabular text-right text-sm", isPredicted && "font-semibold")}>
+            <dd className={cn("tabular text-right text-sm whitespace-nowrap", isPredicted && "font-semibold")}>
               {formatPercent(probabilities[c])}
             </dd>
           </div>
