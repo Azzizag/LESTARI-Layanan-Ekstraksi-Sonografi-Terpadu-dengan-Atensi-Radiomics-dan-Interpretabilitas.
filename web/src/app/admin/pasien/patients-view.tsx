@@ -1,7 +1,7 @@
 "use client"
 
 import { createColumnHelper } from "@tanstack/react-table"
-import { ImageUpIcon, MoreHorizontalIcon, PlusIcon, RotateCcwIcon, UsersIcon } from "lucide-react"
+import { FileDownIcon, ImageUpIcon, MoreHorizontalIcon, PlusIcon, RotateCcwIcon, UsersIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 
@@ -121,6 +121,14 @@ export function PatientsView({ patients, openNew }: { patients: PatientRow[]; op
                       <ImageUpIcon />
                       Unggah citra baru
                     </DropdownMenuItem>
+                    {p.status === "done" && p.lastCaseId ? (
+                      <DropdownMenuItem asChild>
+                        <a href={`/api/report/${p.lastCaseId}`} download>
+                          <FileDownIcon />
+                          Unduh laporan PDF
+                        </a>
+                      </DropdownMenuItem>
+                    ) : null}
                     {p.status === "analysis_failed" && p.lastCaseId ? (
                       <DropdownMenuItem
                         onSelect={() => open({ mode: "retry", patient, caseId: p.lastCaseId! })}

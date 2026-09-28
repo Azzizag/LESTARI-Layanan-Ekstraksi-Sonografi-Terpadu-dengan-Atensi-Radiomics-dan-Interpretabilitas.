@@ -7,7 +7,7 @@ import type { createClient } from "@/lib/supabase/server"
 type Supabase = Awaited<ReturnType<typeof createClient>>
 
 // Kelompok ikon di UI. Aksi baru yang belum dikenal jatuh ke "other".
-export type ActivityKind = "patient" | "analysis" | "analysis_failed" | "review" | "doctor" | "other"
+export type ActivityKind = "patient" | "analysis" | "analysis_failed" | "review" | "report" | "doctor" | "other"
 
 export type ActivityItem = {
   id: number
@@ -55,6 +55,8 @@ function describe(action: string, meta: Meta, target: string): { kind: ActivityK
         text: `Menyimpan diagnosis ${target}${cls ? ` (${classLabel[cls]}${agree})` : ""}`,
       }
     }
+    case "report.download":
+      return { kind: "report", text: `Mengunduh laporan PDF ${target}` }
     case "doctor.create":
       return { kind: "doctor", text: `Menambahkan akun dokter ${target}` }
     case "doctor.update":

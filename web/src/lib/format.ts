@@ -68,3 +68,24 @@ export function ageFromBirthDate(birthDate: string | null, now = new Date()) {
   const [ny, nm, nd] = dayKey(now).split("-").map(Number)
   return ny - by - (nm < bm || (nm === bm && nd < bd) ? 1 : 0)
 }
+
+// Angka paper ditulis persis 2 desimal dengan koma (docs/METODOLOGI.md), mis. 92.36 -> "92,36%".
+const paperDecimal = new Intl.NumberFormat("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+const integerFormat = new Intl.NumberFormat("id-ID")
+
+export const formatPaperPercent = (value: number) => `${paperDecimal.format(value)}%`
+export const formatPaperMs = (value: number) => `${paperDecimal.format(value)} ms`
+export const formatPoints = (value: number) => `${value > 0 ? "+" : ""}${paperDecimal.format(value)} pp`
+export const formatInteger = (value: number) => integerFormat.format(value)
+
+const dateTimeFormat = new Intl.DateTimeFormat("id-ID", {
+  timeZone: APP_TIME_ZONE,
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+})
+
+// "28 Sep 2026 pukul 16.42 WIB" untuk dokumen (laporan PDF).
+export const formatDateTime = (date: Date | string) => `${dateTimeFormat.format(new Date(date))} WIB`

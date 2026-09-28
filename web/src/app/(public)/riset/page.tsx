@@ -1,25 +1,46 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
+import { AppShell } from "@/components/app-shell"
 import { LogoMark } from "@/components/logo"
-import { PhasePlaceholder } from "@/components/page-states"
+import { ResearchContent } from "@/components/research/research-content"
+import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
+import { getCurrentProfile } from "@/lib/auth"
+import { getHitlStats } from "@/lib/hitl"
+import { createClient } from "@/lib/supabase/server"
 
-export const metadata: Metadata = { title: "Riset & Model" }
+export const metadata: Metadata = {
+  title: "Riset & Model",
+  description: "Metode, hasil pengujian, dan keterbatasan model klasifikasi USG payudara LESTARI.",
+}
 
-// Sementara. Halaman Riset lengkap dibangun di Fase 5 (DESIGN.md 5.7).
-export default function RisetPage() {
+// Halaman publik. Staf yang login melihatnya di dalam shell aplikasi beserta statistik HITL
+// dari database; pengunjung hanya melihat angka paper.
+export default async function RisetPage() {
+  const profile = await getCurrentProfile()
+  const hitl = profile ? await getHitlStats(await createClient()) : null
+  const content = <ResearchContent hitl={hitl} signedIn={profile !== null} />
+
+  if (profile) return <AppShell profile={profile}>{content}</AppShell>
+
   return (
-    <main className="mx-auto w-full max-w-5xl p-6">
-      <Link href="/" className="mb-8 inline-flex items-center gap-2.5 font-bold">
-        <LogoMark size={30} />
-        {siteConfig.name}
-      </Link>
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Riset & Model</h1>
-      <PhasePlaceholder
-        phase={5}
-        items={["Kartu model dan metrik dari paper", "Diagram pipeline metode", "Statistik kesepakatan AI dan dokter"]}
-      />
-    </main>
+    <div className="min-h-svh">
+      <header className="sticky top-0 z-10 border-b bg-card">
+        <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-6">
+          <Link href="/" className="flex items-center gap-2.5 rounded-lg font-bold outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <LogoMark size={28} />
+            {siteConfig.name}
+          </Link>
+          <Button asChild size="sm">
+            <Link href="/login">Masuk</Link>
+          </Button>
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-[1440px] p-6">
+        {content}
+        <p className="mt-6 text-center text-xs text-muted-foreground">{siteConfig.disclaimer}</p>
+      </main>
+    </div>
   )
 }

@@ -13,6 +13,7 @@ const pageTitles: { prefix: string; title: string }[] = [
   { prefix: "/admin", title: "Dashboard" },
   { prefix: "/dokter/review", title: "Konsol Review" },
   { prefix: "/dokter", title: "Antrean" },
+  { prefix: "/riset", title: "Riset & Model" },
 ]
 
 function titleFor(pathname: string) {

@@ -2,6 +2,7 @@
 import {
   ArrowRightIcon,
   CircleCheckIcon,
+  FileDownIcon,
   InfoIcon,
   LoaderCircleIcon,
   LockIcon,
@@ -215,6 +216,16 @@ export function DecisionPanel({
         {!readOnly ? (
           <Button size="lg" className="w-full" disabled={!choice || pending} onClick={() => setConfirmOpen(true)}>
             {existing ? "Perbarui diagnosis" : "Simpan diagnosis"}
+          </Button>
+        ) : null}
+
+        {existing || savedNow ? (
+          <Button asChild variant="outline" className="w-full">
+            {/* Unduhan biasa (bukan navigasi klien) agar browser menyimpan file PDF. */}
+            <a href={`/api/report/${caseId}`} download>
+              <FileDownIcon />
+              Unduh laporan PDF
+            </a>
           </Button>
         ) : null}
 

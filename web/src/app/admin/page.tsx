@@ -2,6 +2,7 @@ import {
   ActivityIcon,
   ClockIcon,
   CpuIcon,
+  FileTextIcon,
   ImageIcon,
   PlusIcon,
   ScanSearchIcon,
@@ -34,6 +35,7 @@ const activityIcon: Record<ActivityKind, { icon: LucideIcon; className: string }
   analysis: { icon: CpuIcon, className: "bg-primary-soft text-primary" },
   analysis_failed: { icon: XCircleIcon, className: "bg-benign-bg text-benign" },
   review: { icon: StethoscopeIcon, className: "bg-normal-bg text-normal" },
+  report: { icon: FileTextIcon, className: "bg-muted text-muted-foreground" },
   doctor: { icon: StethoscopeIcon, className: "bg-muted text-muted-foreground" },
   other: { icon: ActivityIcon, className: "bg-muted text-muted-foreground" },
 }
