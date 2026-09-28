@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation"
 
 import { signOut } from "@/app/login/actions"
 import { LogoMark } from "@/components/logo"
+import { useRestoreSidebar } from "@/components/review/collapse-sidebar"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -79,6 +80,7 @@ export function AppSidebar({
   email: string | null
 }) {
   const pathname = usePathname()
+  useRestoreSidebar(pathname)
 
   return (
     <Sidebar collapsible="icon">

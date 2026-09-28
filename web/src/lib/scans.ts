@@ -26,6 +26,13 @@ export const scanPaths = {
     predictionId: string,
     name: "preprocessed" | "gradcam" | "heatmap" | "roi_mask"
   ) => `${patientId}/${caseId}/${predictionId}/${name}.png`,
+  // Anotasi dokter (PNG grayscale, lihat components/review/annotation.ts). Policy storage
+  // hanya mengizinkan dokter menulis ke path berakhiran /mask.png.
+  annotation: (patientId: string, caseId: string) => `${patientId}/${caseId}/mask.png`,
+}
+
+export function isPng(bytes: Uint8Array) {
+  return sniffScanType(bytes) === "image/png"
 }
 
 // Jenis file dari isi (magic bytes), bukan dari nama atau header yang bisa dipalsukan.

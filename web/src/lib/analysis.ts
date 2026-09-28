@@ -91,6 +91,11 @@ const percentFormat = new Intl.NumberFormat("id-ID", {
 })
 const msFormat = new Intl.NumberFormat("id-ID", { maximumFractionDigits: 1 })
 
-export const formatPercent = (value: number) => percentFormat.format(value)
+// Nilai ekstrem tidak dibulatkan menjadi 100% atau 0% (docs/LUMIRA_AUDIT.md A2).
+export function formatPercent(value: number) {
+  if (value >= 0.9995 && value < 1) return `> ${percentFormat.format(0.999)}`
+  if (value > 0 && value < 0.0005) return `< ${percentFormat.format(0.001)}`
+  return percentFormat.format(value)
+}
 export const formatMs = (value: number) =>
   value >= 1000 ? `${msFormat.format(value / 1000)} dtk` : `${msFormat.format(value)} ms`

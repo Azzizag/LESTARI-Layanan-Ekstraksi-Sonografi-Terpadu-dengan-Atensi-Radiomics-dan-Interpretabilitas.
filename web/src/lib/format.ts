@@ -55,6 +55,12 @@ export function formatRelative(date: Date | string, now = new Date()) {
   return dateFormat.format(then)
 }
 
+// Untuk dipakai di tengah kalimat, mis. "Diunggah baru saja".
+export function formatRelativeInline(date: Date | string, now = new Date()) {
+  const label = formatRelative(date, now)
+  return label.charAt(0).toLowerCase() + label.slice(1)
+}
+
 // Usia dalam tahun dari tanggal lahir "YYYY-MM-DD".
 export function ageFromBirthDate(birthDate: string | null, now = new Date()) {
   if (!birthDate) return null

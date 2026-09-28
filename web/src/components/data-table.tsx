@@ -91,6 +91,8 @@ export function DataTable<TData extends RowData>({
   noResults,
   pageSize = 10,
   label,
+  onRowClick,
+  getRowClassName,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- kolom punya tipe nilai yang berbeda-beda
   columns: ColumnDef<DataTableFeatures, TData, any>[]
@@ -101,6 +103,9 @@ export function DataTable<TData extends RowData>({
   noResults: string
   pageSize?: number
   label: string
+  // Baris bisa diklik (mis. membuka konsol review). Tombol di dalam baris tetap bisa difokus keyboard.
+  onRowClick?: (row: TData) => void
+  getRowClassName?: (row: TData) => string | undefined
 }) {
   const table = useTable({
     features: dataTableFeatures,
@@ -161,7 +166,11 @@ export function DataTable<TData extends RowData>({
         <TableBody>
           {rows.length > 0 ? (
             rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow
+                key={row.id}
+                onClick={onRowClick ? () => onRowClick(row.original) : undefined}
+                className={cn(onRowClick && "cursor-pointer", getRowClassName?.(row.original))}
+              >
                 {row.getAllCells().map((cell) => (
                   <TableCell key={cell.id} className="h-12 px-4">
                     <table.FlexRender cell={cell} />
